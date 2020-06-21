@@ -1,0 +1,23 @@
+import personas.*
+import cervezas.*
+import carpa.*
+
+describe "personas"{
+	const alemanPatriota = new Aleman(peso=100,gustaMusicaTrad=true,aguante=350,marcasPreferidas=[stWendeler,konig],pais=alemania)
+	const alemanCipayo = new Aleman(peso=65,gustaMusicaTrad=false,aguante=200,marcasPreferidas=[budWeiser,heineken],pais=alemania)
+	const belga = new Belga(peso=110,gustaMusicaTrad=true,aguante=450,marcasPreferidas=[guiness],pais=belgica)
+	const alemanPatriota = new Aleman(peso=90,gustaMusicaTrad=true,aguante=310,marcasPreferidas=[hofbrau],pais=republicaCheca)
+	const 
+}
+/*var property peso
+	var property jarrasCompradas = []
+	const property gustaMusicaTrad
+	const property aguante
+	const property marcasPreferidas = []
+	const property pais */
+
+test "testX" {
+
+	assert.that(true)
+
+}
