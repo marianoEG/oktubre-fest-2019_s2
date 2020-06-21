@@ -1,23 +1,59 @@
 import personas.*
 import cervezas.*
-import carpa.*
+import carpas.*
 
 describe "personas"{
-	const alemanPatriota = new Aleman(peso=100,gustaMusicaTrad=true,aguante=350,marcasPreferidas=[stWendeler,konig],pais=alemania)
-	const alemanCipayo = new Aleman(peso=65,gustaMusicaTrad=false,aguante=200,marcasPreferidas=[budWeiser,heineken],pais=alemania)
-	const belga = new Belga(peso=110,gustaMusicaTrad=true,aguante=450,marcasPreferidas=[guiness],pais=belgica)
-	const alemanPatriota = new Aleman(peso=90,gustaMusicaTrad=true,aguante=310,marcasPreferidas=[hofbrau],pais=republicaCheca)
-	const 
+	
+	const stWendeler = new CervezaRubia(lupulo=5,origen=alemania,graduacion=8)
+	const konig= new CervezaRubia(lupulo=6,origen=alemania,graduacion=7)
+	const budweiser = new CervezaRubia(lupulo=3,origen=usa,graduacion=5)
+	const heineken = new CervezaRubia(lupulo=5,origen=paisesBajos,graduacion=6)
+	const guinness = new CervezaNegra(lupulo=8,origen=irlanda,graduacion=9)
+	const hofbrau = new CervezaRoja(lupulo=7,origen=alemania,graduacion=8)
+	const alemanPatriota = new Aleman(peso=100,gustaMusicaTrad=true,aguante=40,marcasPreferidas=[stWendeler,konig],pais=alemania)
+	const alemanCipayo = new Aleman(peso=65,gustaMusicaTrad=false,aguante=30,marcasPreferidas=[budweiser,heineken],pais=alemania)
+	const belga = new Belga(peso=110,gustaMusicaTrad=true,aguante=40,marcasPreferidas=[guinness],pais=belgica)
+	const checo = new Checo(peso=90,gustaMusicaTrad=true,aguante=35,marcasPreferidas=[hofbrau],pais=republicaCheca)
+	const carpa1 = new Carpa(capacidad=40,tieneBanda=true,marcaCerveza=stWendeler,personasDentro=[alemanPatriota,alemanCipayo])
+	const carpa2 = new Carpa(capacidad=30,tieneBanda=false,marcaCerveza=guinness,personasDentro=[belga])
+	const jarra1 = new Jarra(capacidad=1,marca=stWendeler)
+	const jarra2 = new Jarra(capacidad=1,marca=konig)
+	const jarra3 = new Jarra(capacidad=2,marca=hofbrau)
+	const jarra4 = new Jarra(capacidad=2,marca=hofbrau)
+	const jarra5 = new Jarra(capacidad=0.5,marca=hofbrau)
+	
+	
+	test "leGusta(cerveza)"{
+		assert.that(alemanPatriota.leGusta(stWendeler))
+		assert.that(belga.leGusta(guinness))
+		assert.notThat(belga.leGusta(budweiser))
+		assert.that(checo.leGusta(guinness))
+		assert.notThat(checo.leGusta(konig))
+	}
+	
+	test "alcoholIngerido y patriotismo"{
+		alemanPatriota.comprarCerveza(jarra1)
+		alemanPatriota.comprarCerveza(jarra2)
+		alemanPatriota.comprarCerveza(jarra3)
+		assert.equals(alemanPatriota.alcoholIngerido(),0.375)
+		assert.that(alemanPatriota.esPatriota())
+	}
+	
+	test "esta ebrio y es empedernido"{
+		alemanPatriota.comprarCerveza(jarra1)
+		alemanPatriota.comprarCerveza(jarra2)
+		alemanPatriota.comprarCerveza(jarra3)
+		assert.notThat(alemanPatriota.estaEbrio())
+		alemanPatriota.comprarCerveza(jarra4)
+		assert.that(alemanPatriota.estaEbrio())
+		assert.that(alemanPatriota.esEmpedernido())
+		alemanPatriota.comprarCerveza(jarra5)
+		assert.notThat(alemanPatriota.esEmpedernido())
+	}
+	
+	test "quiereEntrarA(carpa)"{
+		assert.that(alemanPatriota.quiereEntrarA(carpa1))
+		assert.notThat(alemanPatriota.quiereEntrarA(carpa2))
+	}
 }
-/*var property peso
-	var property jarrasCompradas = []
-	const property gustaMusicaTrad
-	const property aguante
-	const property marcasPreferidas = []
-	const property pais */
 
-test "testX" {
-
-	assert.that(true)
-
-}

@@ -6,14 +6,14 @@ class Persona {
 	const property gustaMusicaTrad
 	const property aguante
 	const property marcasPreferidas = []
-	const property nacionalidad
+	const property pais
 	method leGusta(cerveza)
 	method comprarCerveza(cual){jarrasCompradas.add(cual)}
 	method alcoholIngerido(){return jarrasCompradas.sum({jarra=>jarra.cantidadDeAlcohol()})}
 	method estaEbrio(){return (self.alcoholIngerido() * peso) > aguante}
 	method quiereEntrarA(carpa){return self.leGusta(carpa.marcaCerveza()) and self.gustaMusicaTrad() == carpa.tieneBanda()}
-	method esEmpedernido(){jarrasCompradas.all({jarra=>jarra.capacidad() >= 1})}
-	method esPatriota(){jarrasCompradas.all({jarra=>jarra.marca().origen() == self.nacionalidad()})}
+	method esEmpedernido(){return jarrasCompradas.all({jarra=>jarra.capacidad() >= 1})}
+	method esPatriota(){return jarrasCompradas.all({jarra=>jarra.marca().origen() == self.pais()})}
 	
 }
 
@@ -33,3 +33,6 @@ class Aleman inherits Persona {
 object belgica{}
 object republicaCheca{}
 object alemania{}
+object usa{}
+object paisesBajos{}
+object irlanda{}

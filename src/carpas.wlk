@@ -6,7 +6,7 @@ class Carpa {
 	const property marcaCerveza
 	var property personasDentro = []
 	
-	method permiteIngreso(persona){return not persona.estaEbrio() and capacidad - personasDentro > 0}
+	method permiteIngreso(persona){return not persona.estaEbrio() and capacidad - personasDentro.size() > 0}
 	method puedeEntrar(persona){return persona.quiereEntrarA(self) and self.permiteIngreso(persona)}
 	method entrar(persona){
 		if (self.puedeEntrar(persona)){personasDentro.add(persona)} 
@@ -14,7 +14,7 @@ class Carpa {
 	}
 	method servir(persona,cuanto){
 		if (personasDentro.contains(persona)){persona.comprarCerveza(new Jarra(capacidad=cuanto, marca=self.marcaCerveza()))}
-		else{throw new Exception(message = "EROR, no se encuentra el cliente")}
+		else{throw new Exception(message = "ERROR, no se encuentra el cliente")}
 	}
 	method cuantosEbriosEmpedernidos(){
 		return personasDentro.count({ persona => persona.esEmpedernido() })

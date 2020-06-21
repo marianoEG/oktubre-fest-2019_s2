@@ -1,7 +1,7 @@
 class Cerveza {
 	var property lupulo
 	var property origen
-	var property graduacion
+	var property graduacion = 0
 	method graduacion(){return graduacion}
 }
 
@@ -25,5 +25,5 @@ class Jarra {
 }
 
 object graduacionReglamentaria {
-	var property valor = 8
+	var property valor = 9
 }

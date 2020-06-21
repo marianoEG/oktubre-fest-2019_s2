@@ -1,0 +1,50 @@
+import personas.*
+import cervezas.*
+import carpas.*
+
+describe "carpas"{
+	const stWendeler = new CervezaRubia(lupulo=5,origen=alemania,graduacion=8)
+	const konig= new CervezaRubia(lupulo=6,origen=alemania,graduacion=7)
+	const budweiser = new CervezaRubia(lupulo=3,origen=usa,graduacion=5)
+	const heineken = new CervezaRubia(lupulo=5,origen=paisesBajos,graduacion=6)
+	const guinness = new CervezaNegra(lupulo=8,origen=irlanda,graduacion=9)
+	const hofbrau = new CervezaRoja(lupulo=7,origen=alemania,graduacion=8)
+	const aleman = new Aleman(peso=100,gustaMusicaTrad=true,aguante=40,marcasPreferidas=[stWendeler,konig],pais=alemania)
+	const aleman2 = new Aleman(peso=65,gustaMusicaTrad=false,aguante=30,marcasPreferidas=[budweiser,heineken],pais=alemania)
+	const carpa1 = new Carpa(capacidad=40,tieneBanda=true,marcaCerveza=stWendeler)
+	const carpa2 = new Carpa(capacidad=30,tieneBanda=false,marcaCerveza=guinness)
+	const jarra1 = new Jarra(capacidad=1,marca=stWendeler)
+	const jarra2 = new Jarra(capacidad=1,marca=konig)
+	const jarra3 = new Jarra(capacidad=2,marca=hofbrau)
+	const jarra4 = new Jarra(capacidad=2,marca=hofbrau)
+	const jarra5 = new Jarra(capacidad=0.5,marca=hofbrau)
+	
+	test "ingresos" {
+	assert.that(carpa1.permiteIngreso(aleman))
+	assert.that(true)
+	aleman.comprarCerveza(jarra1)
+	aleman.comprarCerveza(jarra2)
+	aleman.comprarCerveza(jarra3)
+	aleman.comprarCerveza(jarra4)
+	assert.notThat(carpa1.permiteIngreso(aleman))
+	}
+	
+	test "puede entrar"{
+		assert.that(carpa1.puedeEntrar(aleman))
+		assert.notThat(carpa2.puedeEntrar(aleman))
+	}
+	
+	test "entrar, servir y empedernidos"{
+		assert.throwsExceptionWithMessage("No puede ingresar compañero",{carpa1.entrar(aleman2)})
+		carpa1.entrar(aleman)
+		assert.that(carpa1.personasDentro().contains(aleman))
+		assert.throwsExceptionWithMessage("ERROR, no se encuentra el cliente",{carpa1.servir(aleman2,3)})
+		assert.equals(aleman.jarrasCompradas().size(),0)
+		carpa1.servir(aleman,1)
+		assert.equals(aleman.jarrasCompradas().size(),1)		
+		carpa1.servir(aleman,2)
+		assert.equals(carpa1.cuantosEbriosEmpedernidos(),1)
+		carpa1.servir(aleman,0.5)
+		assert.equals(carpa1.cuantosEbriosEmpedernidos(),0)
+	}
+}
